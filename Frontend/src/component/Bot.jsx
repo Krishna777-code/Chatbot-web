@@ -4,6 +4,9 @@ import { FaUserCircle } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css"; // 👈 Import Bootstrap Icons
 
+const API_URI = import.meta.env.VITE_API_URI;
+
+
 function Bot() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -18,9 +21,8 @@ function Bot() {
     if (!input.trim()) return;
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:4002/bot/v1/message", {
-        text: input,
-      });
+     const res = await axios.post(API_URI, { text: input });
+
 
       if (res.status === 200) {
         setMessages([
